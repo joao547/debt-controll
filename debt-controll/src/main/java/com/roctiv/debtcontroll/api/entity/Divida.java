@@ -17,7 +17,7 @@ public class Divida implements Serializable {
     private double total;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -26,7 +26,7 @@ public class Divida implements Serializable {
         this.id = id;
     }
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     public User getUser() {
         return user;
     }
