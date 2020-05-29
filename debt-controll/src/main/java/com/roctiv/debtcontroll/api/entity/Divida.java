@@ -26,7 +26,7 @@ public class Divida implements Serializable {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     public User getUser() {
         return user;
     }
