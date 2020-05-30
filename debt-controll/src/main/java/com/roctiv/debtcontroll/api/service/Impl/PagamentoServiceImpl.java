@@ -2,14 +2,18 @@ package com.roctiv.debtcontroll.api.service.Impl;
 
 import com.roctiv.debtcontroll.api.dao.DividaDAO;
 import com.roctiv.debtcontroll.api.dao.PagamentoDAO;
+import com.roctiv.debtcontroll.api.dao.UserDAO;
 import com.roctiv.debtcontroll.api.entity.Divida;
 import com.roctiv.debtcontroll.api.entity.Pagamento;
+import com.roctiv.debtcontroll.api.entity.User;
 import com.roctiv.debtcontroll.api.enums.StatusPagamento;
 import com.roctiv.debtcontroll.api.model.PagamentoModel;
 import com.roctiv.debtcontroll.api.service.PagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +24,9 @@ public class PagamentoServiceImpl implements PagamentoService {
 
     @Autowired
     private PagamentoDAO pagamentoDAO;
+
+    @Autowired
+    private UserDAO userDAO;
 
     @Override
     public Pagamento create(PagamentoModel pagamentoModel) {
@@ -37,6 +44,19 @@ public class PagamentoServiceImpl implements PagamentoService {
     public List<Pagamento> listByDivida(Long idDivida) {
         Divida divida = this.dividaDAO.listById(idDivida);
         return this.pagamentoDAO.listByDivida(divida);
+    }
+
+    @Override
+    public List<Pagamento> listByUser(Long idUser) {
+        User user = this.userDAO.getUserById(idUser);
+
+        return this.pagamentoDAO.listByUser(user);
+    }
+
+    @Override
+    public List<Pagamento> listByUserAndMonth(Long idUser, Integer mes, Integer ano) {
+        User user = this.userDAO.getUserById(idUser);
+        return this.pagamentoDAO.listByUserAndMonth(user, mes, ano);
     }
 
     @Override

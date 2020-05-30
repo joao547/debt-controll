@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -29,9 +30,23 @@ public class PagamentoController {
     }
 
     @GetMapping("/dividas/{id}")
-    public ResponseEntity listById(@PathVariable Long id) throws NoSuchAlgorithmException {
+    public ResponseEntity listByDivida(@PathVariable Long id) throws NoSuchAlgorithmException {
 
         List<PagamentoResponse> response = this.getPagamentos(this.pagamentoService.listByDivida(id));
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity listByUser(@PathVariable Long id) throws NoSuchAlgorithmException {
+
+        List<PagamentoResponse> response = this.getPagamentos(this.pagamentoService.listByUser(id));
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/mes")
+    public ResponseEntity listByUserAndMonth(@RequestHeader Long id, @RequestHeader Integer mes, @RequestHeader Integer ano) throws NoSuchAlgorithmException {
+
+        List<PagamentoResponse> response = this.getPagamentos(this.pagamentoService.listByUserAndMonth(id,mes, ano));
         return ResponseEntity.ok(response);
     }
 
