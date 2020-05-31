@@ -61,6 +61,14 @@ public class PagamentoServiceImpl implements PagamentoService {
 
     @Override
     public Pagamento listById(Long id) {
-        return null;
+        return this.pagamentoDAO.findOne(id);
+    }
+
+    @Override
+    public Pagamento updateStatus(Long id) {
+        Pagamento pagamento = listById(id);
+        pagamento.setStatus(StatusPagamento.PAGO);
+
+        return this.pagamentoDAO.merge(pagamento);
     }
 }

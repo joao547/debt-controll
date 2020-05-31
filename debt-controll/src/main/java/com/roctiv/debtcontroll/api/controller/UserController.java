@@ -44,19 +44,6 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity login(@RequestBody LoginModel login) throws NoSuchAlgorithmException {
-
-        UserResponse response = null;
-        try {
-            response = new UserResponse(this.userService.login(login.getUsername(),login.getPass()));
-        } catch (LoginNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-
-        return ResponseEntity.ok(response);
-    }
-
     private User formatUser(UserModel userModel){
         User user = new User();
         user.setNome(userModel.getNome());

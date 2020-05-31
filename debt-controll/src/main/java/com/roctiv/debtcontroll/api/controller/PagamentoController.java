@@ -50,6 +50,13 @@ public class PagamentoController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping
+    public ResponseEntity updateStatus(@RequestBody PagamentoModel pagamentoModel) throws NoSuchAlgorithmException {
+
+        PagamentoResponse response = new PagamentoResponse(this.pagamentoService.updateStatus(pagamentoModel.getId()));
+        return ResponseEntity.ok(response);
+    }
+
     private List<PagamentoResponse> getPagamentos(List<Pagamento> pagamentos){
         List<PagamentoResponse> pagamentoResponses = new ArrayList<>();
         for(Pagamento pagamento : pagamentos){

@@ -17,4 +17,6 @@ public interface PagamentoService {
     List<Pagamento> listByUserAndMonth(Long idUser, Integer mes, Integer ano);
 
     Pagamento listById(Long id);
+
+    Pagamento updateStatus(Long id);
 }
